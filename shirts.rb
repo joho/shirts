@@ -13,7 +13,7 @@ end
 get '/' do
   @photo = flickr.photos.search  :api_key => flickr_config['key'],
                                 :user_id => '86448492@N00',
-                                # :tags => 'everydamnedshirt',
+                                :tags => 'everydamnedshirt',
                                 :per_page => 1
                                  
   @photo_info = flickr.photos.getInfo(:photo_id => @photo[0]['id'])
