@@ -4,4 +4,4 @@ set :environment,       :production
 
 require 'shirts'
 
-run Sinatra.application
+run Sinatra::Application
