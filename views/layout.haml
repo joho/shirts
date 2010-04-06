@@ -1,5 +1,11 @@
 %html{html_attrs('en-AU')}
   %head
     %title Every Damned Shirt
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/style.css' }
   %body
-    = yield
+    .container
+      = yield
+  %script{ :src => 'http://www.google-analytics.com/urchin.js', :type => 'text/javascript' }
+    :javascript
+      _uacct = "UA-708262-3";
+      urchinTracker();

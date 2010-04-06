@@ -1,1 +1,9 @@
-coming soon
+%img{ :src => @photo_url }
+
+%p{ :class => 'description' }
+  = @photo_info.description.gsub("\n", '<br />')
+
+%h1
+  Every Damned Shirt
+%p
+  Every day, I will pull a tshirt out of my drawer(s), wear it, photograph it, upload it, and write a little bit about its history. No repeats until I'm done. By <a href="http://whoisjohnbarton.com">John</a>.
