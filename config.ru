@@ -1,5 +1,7 @@
 require 'sinatra'
 
-set :env,       :production
+set :environment,       :production
+
 require 'shirts'
+
 run Sinatra.application
