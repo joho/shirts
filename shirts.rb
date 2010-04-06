@@ -6,15 +6,14 @@ require 'flickraw'
 flickr_config = if File.exists?('flickr.yml')
   YAML.load_file('flickr.yml')
 else
-  { "secret" => ENV['flickr_secret'],
-    "key" => ENV['flickr_key'] }
+  { 'key' => ENV['flickr_key'] }
 end
 
 get '/' do
   @photo = flickr.photos.search  :api_key => flickr_config['key'],
-                                :user_id => '86448492@N00',
-                                :tags => 'everydamnedshirt',
-                                :per_page => 1
+                                 :user_id => '86448492@N00',
+                                 :tags => 'everydamnedshirt',
+                                 :per_page => 1
   
   entity_tag(@photo[0]['id'])
                           
