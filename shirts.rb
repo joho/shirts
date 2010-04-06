@@ -15,7 +15,9 @@ get '/' do
                                 :user_id => '86448492@N00',
                                 :tags => 'everydamnedshirt',
                                 :per_page => 1
-                                 
+  
+  entity_tag(@photo[0]['id'])
+                          
   @photo_info = flickr.photos.getInfo(:photo_id => @photo[0]['id'])
   @photo_url = FlickRaw.url(@photo_info)
   
