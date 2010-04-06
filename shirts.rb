@@ -16,7 +16,7 @@ get '/' do
                                 # :tags => 'everydamnedshirt',
                                 :per_page => 1
                                  
-  @photo_info = flickr.photos.getInfo(:photo_id => @photo.first[0]['id'])
+  @photo_info = flickr.photos.getInfo(:photo_id => @photo[0]['id'])
   @photo_url = FlickRaw.url(@photo_info)
   
   haml :index
