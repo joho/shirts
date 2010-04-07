@@ -10,16 +10,22 @@ else
 end
 
 get '/' do
-  @photo = flickr.photos.search  :api_key => flickr_config['key'],
+  photos = flickr.photos.search  :api_key => flickr_config['key'],
                                  :user_id => '86448492@N00',
                                  :tags => 'everydamnedshirt',
-                                 :per_page => 1
+                                 :per_page => 20,
+                                 :extra_info => 'path_alias,url_sq,url_t,url_s,url_m,url_o'
   
-  entity_tag(@photo[0]['id'])
+  @photo = photos[0]
+  entity_tag(@photo['id'])
                           
-  @photo_info = flickr.photos.getInfo(:photo_id => @photo[0]['id'])
-  @photo_url = FlickRaw.url(@photo_info)
-  @photo_link = FlickRaw.url_photopage(@photo_info)
+  @description = flickr.photos.getInfo(:photo_id => @photo['id']).description
+  @photo_url = FlickRaw.url(@photo)
+  @photo_link = FlickRaw.url_photopage(@photo)
+  
+  @other_thumbnails = photos.to_a[1, photos.size].reverse.collect do |photo|
+    [photo.title, FlickRaw.url_t(photo), FlickRaw.url_photopage(photo)]
+  end
   
   haml :index
 end

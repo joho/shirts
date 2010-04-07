@@ -11,9 +11,12 @@ body {
 	margin: 0 auto;
 }
 
-img {
+img.main {
 	float: right;
 	margin-left: 0.5em;
+}
+
+img {
 	border: 0;
 }
 
