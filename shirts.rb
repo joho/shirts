@@ -19,6 +19,7 @@ get '/' do
                           
   @photo_info = flickr.photos.getInfo(:photo_id => @photo[0]['id'])
   @photo_url = FlickRaw.url(@photo_info)
+  @photo_link = FlickRaw.url_photopage(@photo_info)
   
   haml :index
 end

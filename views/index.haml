@@ -1,4 +1,5 @@
-%img{ :src => @photo_url }
+%a{ :href => @photo_link, :title => @photo_info.title }
+  %img{ :src => @photo_url, :alt => @photo_info.title }
 
 %p{ :class => 'description' }
   = @photo_info.description.gsub("\n", '<br />')
