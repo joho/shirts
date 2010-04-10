@@ -23,7 +23,7 @@ get '/' do
   @photo_url = FlickRaw.url(@photo)
   @photo_link = FlickRaw.url_photopage(@photo)
   
-  @other_thumbnails = photos.to_a[1, photos.size].reverse.collect do |photo|
+  @other_thumbnails = photos.to_a.reverse.collect do |photo|
     [photo.title, FlickRaw.url_t(photo), FlickRaw.url_photopage(photo)]
   end
   
