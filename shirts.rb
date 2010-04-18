@@ -9,43 +9,70 @@ else
   { 'key' => ENV['flickr_key'] }
 end
 
-get '/' do
-  photos = flickr.photos.search  :api_key => flickr_config['key'],
-                                 :user_id => '86448492@N00',
-                                 :tags => 'everydamnedshirt',
-                                 :per_page => 20,
-                                 :extra_info => 'path_alias,url_sq,url_t,url_s,url_m,url_o'
+class FlickrSearch
+  def initialize(photo_id = nil)
+    @photo_id = photo_id
+  end
   
-  @photo = photos[0]
+  def current_photo
+    @current_photo ||= if photo_id
+      matching_photos.to_a.find { |photo| photo['id'] == @photo_id }
+    else
+      matching_photos[0]
+    end
+  end
+  
+  def current_photo_description
+    flickr.photos.getInfo(:photo_id => current_photo['id']).description
+  end
+  
+  def other_thumbnails
+    matching_photos.to_a.reverse.collect do |photo|
+      [photo.title, FlickRaw.url_t(photo), "/show/#{photo['id']}"]
+    end
+  end
+  
+protected
+  def matching_photos
+    @matching_photos ||= flickr.photos.search(search_conditions)
+  end
+  
+  def search_conditions
+    {
+      :api_key => flickr_config['key'],
+      :user_id => '86448492@N00',
+      :tags => 'everydamnedshirt',
+      :per_page => 20,
+      :extra_info => 'path_alias,url_sq,url_t,url_s,url_m,url_o'
+    }
+  end
+end
+
+get '/' do
+  search = FlickrSearch.new
+
+  @photo = search.current_photo
   etag(@photo['id'])
                           
-  @description = flickr.photos.getInfo(:photo_id => @photo['id']).description
+  @description = search.current_photo_description
   @photo_url = FlickRaw.url(@photo)
   @photo_link = FlickRaw.url_photopage(@photo)
   
-  @other_thumbnails = photos.to_a.reverse.collect do |photo|
-    [photo.title, FlickRaw.url_t(photo), "/show/#{photo['id']}"]
-  end
+  @other_thumbnails = search.other_thumbnails
   haml :index
 end
 
 get '/show/:photo_id' do
-  photos = flickr.photos.search  :api_key => flickr_config['key'],
-                                 :user_id => '86448492@N00',
-                                 :tags => 'everydamnedshirt',
-                                 :per_page => 20,
-                                 :extra_info => 'path_alias,url_sq,url_t,url_s,url_m,url_o'
-  photo_array = photos.to_a
-  @photo = photo_array.find { |photo| photo['id'] == params[:photo_id] }
+  search = FlickrSearch.new(params[:photo_id])
+
+  @photo = search.current_photo
   etag(@photo['id'])
                           
-  @description = flickr.photos.getInfo(:photo_id => @photo['id']).description
+  @description = search.current_photo_description
   @photo_url = FlickRaw.url(@photo)
   @photo_link = FlickRaw.url_photopage(@photo)
   
-  @other_thumbnails = photo_array.reverse.collect do |photo|
-    [photo.title, FlickRaw.url_t(photo), "/show/#{photo['id']}"]
-  end
+  @other_thumbnails = search.other_thumbnails
   
   haml :index
 end
