@@ -3,13 +3,13 @@ require 'haml'
 require 'sinatra'
 require 'flickraw'
 
-flickr_config = if File.exists?('flickr.yml')
-  YAML.load_file('flickr.yml')
-else
-  { 'key' => ENV['flickr_key'] }
-end
-
 class FlickrSearch
+  @@flickr_config = if File.exists?('flickr.yml')
+    YAML.load_file('flickr.yml')
+  else
+    { 'key' => ENV['flickr_key'] }
+  end
+  
   def initialize(photo_id = nil)
     @photo_id = photo_id
   end
@@ -39,7 +39,7 @@ protected
   
   def search_conditions
     {
-      :api_key => flickr_config['key'],
+      :api_key => @@flickr_config['key'],
       :user_id => '86448492@N00',
       :tags => 'everydamnedshirt',
       :per_page => 50,
