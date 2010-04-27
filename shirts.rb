@@ -15,7 +15,7 @@ class FlickrSearch
   end
   
   def current_photo
-    @current_photo ||= if photo_id
+    @current_photo ||= if @photo_id
       matching_photos.to_a.find { |photo| photo['id'] == @photo_id }
     else
       matching_photos[0]
