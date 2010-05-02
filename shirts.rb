@@ -42,6 +42,7 @@ protected
       :api_key => @@flickr_config['key'],
       :user_id => '86448492@N00',
       :tags => 'everydamnedshirt',
+      :sort => 'date-taken-desc',
       :per_page => 50,
       :extra_info => 'path_alias,url_sq,url_t,url_s,url_m,url_o'
     }
