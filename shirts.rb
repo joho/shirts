@@ -1,15 +1,17 @@
 require 'rubygems'
 require 'haml'
 require 'sinatra'
+
+FlickRawOptions = if File.exists?('flickr.yml')
+  YAML.load_file('flickr.yml')
+else
+  { 'api_key' => ENV['flickr_key'] }
+end
+
 require 'flickraw'
 
+
 class FlickrSearch
-  @@flickr_config = if File.exists?('flickr.yml')
-    YAML.load_file('flickr.yml')
-  else
-    { 'key' => ENV['flickr_key'] }
-  end
-  
   def initialize(photo_id = nil)
     @photo_id = photo_id
   end
@@ -39,7 +41,6 @@ protected
   
   def search_conditions
     {
-      :api_key => @@flickr_config['key'],
       :user_id => '86448492@N00',
       :tags => 'everydamnedshirt',
       :sort => 'date-taken-desc',
