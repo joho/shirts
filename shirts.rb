@@ -44,7 +44,7 @@ protected
       :user_id => '86448492@N00',
       :tags => 'everydamnedshirt',
       :sort => 'date-taken-desc',
-      :per_page => 50,
+      :per_page => 100,
       :extra_info => 'path_alias,url_sq,url_t,url_s,url_m,url_o'
     }
   end
