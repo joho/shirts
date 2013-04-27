@@ -1,1 +1,1 @@
-web: bundle exec ruby shirts.rb -p $PORT
+web: rackup -s puma -p $PORT
