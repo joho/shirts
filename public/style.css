@@ -30,10 +30,19 @@ a {
   text-decoration: none;
 }
 
+p {
+  font-size: 1.1em;
+  line-height: 1.6em;
+}
+
 p.description {
 	padding-top: 2em;
 }
 
-p.description a {
-  text-decoration: underline;
+.shirt {
+  width: 74px;
+  height: 74px;
+  overflow: hidden;
+  float: left;
+  margin: 1px;
 }

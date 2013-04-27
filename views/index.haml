@@ -7,8 +7,14 @@
 %h1
   Every Damned Shirt
 %p
-  Every day, I will pull a tshirt out of my drawer(s), wear it, photograph it, upload it, and write a little bit about its history. No repeats until I'm done. By <a href="http://whoisjohnbarton.com">John</a>. Full set in my <a href="http://www.flickr.com/photos/johotravels/tags/everydamnedshirt/">photostream</a>. Or <a href="http://api.flickr.com/services/feeds/photos_public.gne?id=86448492@N00&tags=everydamnedshirt&lang=en-us&format=rss_200">RSS</a> if you prefer.
-  
-- @other_thumbnails.each do |title, image_href, photo_url|
-  %a{ :href => photo_url, :title => title }
-    %img{ :src => image_href, :alt => title }
+  I own a lot of tshirts. I need to do a cull. I get kind of attached to them.
+%p
+  Almost every day, I will pull a tshirt out of my drawer(s), wear it, photograph it, upload it, and write a little bit of tedious backstory. No repeats until I'm done. Then I'll throw a whole bunch out.
+%p
+  Built by <a href="http://whoisjohnbarton.com">John Barton</a>, and the code can be found at <a href="https://github.com/joho/shirts">github.com/joho/shirts</a>. You can follow along at home with <a href="http://api.flickr.com/services/feeds/photos_public.gne?id=86448492@N00&tags=everydamnedshirt&lang=en-us&format=rss_200">The magic of RSS</a>.
+
+.shirts
+  - @other_thumbnails.each do |title, image_href, photo_url|
+    .shirt
+      %a{ :href => photo_url, :title => title }
+        %img{ :src => image_href, :alt => title }
