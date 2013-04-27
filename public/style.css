@@ -26,6 +26,14 @@ h1 {
 	text-align: right;
 }
 
+a {
+  text-decoration: none;
+}
+
 p.description {
 	padding-top: 2em;
+}
+
+p.description a {
+  text-decoration: underline;
 }
