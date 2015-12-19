@@ -26,11 +26,11 @@ class FlickrSearch
     end
   end
 
-protected
   def matching_photos
     @matching_photos ||= flickr.photos.search(search_conditions)
   end
 
+protected
   def search_conditions
     {
       :user_id => '86448492@N00',
