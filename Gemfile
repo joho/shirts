@@ -5,7 +5,7 @@ gem "puma"
 
 gem "haml"
 
-gem "flickraw", "0.8.1"
+gem "flickraw"
 
 group :development do
   gem "foreman"
